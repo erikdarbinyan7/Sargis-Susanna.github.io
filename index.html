@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Switcher</title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #f0f0f0;  /* Optional: Add a background color */
+        }
+        img {
+            width: 60%;     /* Makes the image fill the width of the screen */
+            height: 60%;    /* Makes the image fill the height of the screen */
+            object-fit: contain; /* Ensures the entire image fits without distortion */
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <h1 style="position: absolute; top: 10px; color: black;">Click on the image to switch</h1>
+    <img id="image" src="front.jpg" alt="Image" onclick="switchImage()">
+
+    <script>
+        let image1 = "front.jpg";
+        let image2 = "back.jpg";
+        let currentImage = image1;
+
+        function switchImage() {
+            let imgElement = document.getElementById("image");
+
+            // Switch the image
+            if (currentImage === image1) {
+                imgElement.src = image2;
+                currentImage = image2;
+            } else {
+                imgElement.src = image1;
+                currentImage = image1;
+            }
+        }
+    </script>
+</body>
+</html>
