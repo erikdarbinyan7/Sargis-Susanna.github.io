@@ -97,8 +97,12 @@
             "EN": "Click the screen to change"
         };
 
-        let preloadedImage = new Image();
-        preloadedImage.src = image2;
+        let preloadedImage1 = new Image();
+        preloadedImage1.src = image2;
+        let preloadedImage2 = new Image();
+        preloadedImage2.src = "front1.png";
+        let preloadedImage3 = new Image();
+        preloadedImage3.src = "back1.png";
 
         function switchImage() {
             let imgElement = document.getElementById("image");
@@ -134,8 +138,6 @@
             let imgElement = document.getElementById("image");
             currentImage = image1;
             imgElement.src = currentImage;
-
-            preloadedImage.src = image2;
         }
 
         setTimeout(function() {
