@@ -44,26 +44,6 @@
             transition: opacity 0.5s ease-in-out;
         }
 
-        .language-switch {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            padding: 8px 12px;
-            border: none;
-            cursor: pointer;
-            font-size: 14px;
-            font-weight: bold;
-            text-transform: uppercase;
-            background: linear-gradient(45deg, #ff4b5c, #6a6ee1);
-            color: white;
-            border-radius: 5px;
-            transition: 0.3s;
-        }
-
-        .language-switch:hover {
-            opacity: 0.8;
-        }
-
         @keyframes pulse {
             0% {
                 transform: scale(1);
@@ -81,28 +61,29 @@
     </style>
 </head>
 <body>
-    <button class="language-switch" onclick="switchLanguage()">HY</button>
-    <h1 style="display: none" id="message">Սեղմեք էկրանին՝ փոխելու համար</h1>
-    <img id="image" src="front.png" alt="Image" onclick="switchImage()">
-
+    <h1 style="display: none" id="message"></h1>
+    <img id="image" src="" alt="Image" onclick="switchImage()">
 
     <script>
-        let image1 = "front.png";
-        let image2 = "back.png";
-        let currentImage = image1;
+        let subdomain = window.location.hostname.split(".")[0];
+        let currentLang = subdomain === "en" ? "EN" : "HY";
 
-        let currentLang = "HY";
-        let translations = {
-            "HY": "Սեղմեք էկրանին՝ փոխելու համար",
-            "EN": "Click the screen to change"
+        let images = {
+            "HY": { front: "front.png", back: "back.png" },
+            "EN": { front: "front1.png", back: "back1.png" }
         };
+
+        let image1 = images[currentLang].front;
+        let image2 = images[currentLang].back;
+        let currentImage = image1;
 
         let preloadedImage1 = new Image();
         preloadedImage1.src = image2;
-        let preloadedImage2 = new Image();
-        preloadedImage2.src = "front1.png";
-        let preloadedImage3 = new Image();
-        preloadedImage3.src = "back1.png";
+
+        document.getElementById("image").src = currentImage;
+        document.getElementById("message").textContent = currentLang === "EN"
+            ? "Click the screen to change"
+            : "Սեղմեք էկրանին՝ փոխելու համար";
 
         function switchImage() {
             let imgElement = document.getElementById("image");
@@ -120,24 +101,6 @@
 
                 imgElement.style.opacity = 1;
             }, 500);
-        }
-
-        function switchLanguage() {
-            currentLang = currentLang === "HY" ? "EN" : "HY";
-            document.getElementById("message").textContent = translations[currentLang];
-            document.querySelector(".language-switch").textContent = currentLang;
-
-            if (currentLang === "EN") {
-                image1 = "front1.png";
-                image2 = "back1.png";
-            } else {
-                image1 = "front.png";
-                image2 = "back.png";
-            }
-
-            let imgElement = document.getElementById("image");
-            currentImage = image1;
-            imgElement.src = currentImage;
         }
 
         setTimeout(function() {
